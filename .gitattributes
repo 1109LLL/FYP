@@ -1,0 +1,2 @@
+Hotel_reviews/data/Hotel_Reviews.csv filter=lfs diff=lfs merge=lfs -text
+Hotel_reviews/pickled_files/reviews.pickle filter=lfs diff=lfs merge=lfs -text
