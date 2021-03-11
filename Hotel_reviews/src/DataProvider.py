@@ -8,12 +8,17 @@ class Getter:
         unique_hotel_list = df.Hotel_Name.unique()
         return unique_hotel_list
 
-
     def getFeatureList(self):
         features = ["room","bed","location","bathroom","staff","staircase",
                     "park","hotel","building","style","transport","parking",
                     "food","breakfast","lunch","dinner","restaurant"]
         return features
+
+    def get_cleaned_reviews(self, review_type):
+        path = "../pickled_files/cleaned_{}_reviews.pickle".format(review_type)
+        pickle_in = open(path,"rb")
+        cleaned_reviews = pickle.load(pickle_in)
+        return cleaned_reviews
 
     def getPosNegReviewsClf(self):
         pickle_in = open("../pickled_clfs/pos_neg_review_vectorizer.pickle","rb")

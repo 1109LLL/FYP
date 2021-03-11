@@ -18,6 +18,9 @@ from bs4 import BeautifulSoup
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
 from DataProcessor import Categorical
+from sklearn.model_selection import GridSearchCV
+
+
 # words = ['minor','sandwich', 'able','private']
 # treebankTagger = nltk.data.load('taggers/maxent_treebank_pos_tagger/english.pickle')
 # pos_tagged = treebankTagger.tag(words)
@@ -111,10 +114,39 @@ def newtest():
 
     predict(X, y)
 
-# newtest()
-cat = Categorical()
 
-cat.labelling()
+
+def create_document_term_matrix(x, vectorizer):
+    return pd.DataFrame(x, columns=vectorizer.get_feature_names())
+
+# msg = ["hi man how are you", "i just wanna sleep"]
+
+# vec = CountVectorizer()
+# x = vec.fit_transform(msg).toarray()
+# df = create_document_term_matrix(x,vec)
+# print(df)
+
+# clf = DecisionTreeClassifier()
+
+X_path = "../pickled_files/X_training_set.pickle"
+y_path = "../pickled_files/y_training_set_label.pickle"
+pickle_in = open(X_path, "rb")
+X = pickle.load(pickle_in)
+pickle_in = open(y_path, "rb")
+y = pickle.load(pickle_in)
+
+print(X[0])
+print(X[1])
+print(X[2])
+print(len(X))
+print(y[0])
+print(y[1])
+print(len(y))
+
+# newtest()
+# cat = Categorical()
+
+# cat.labelling()
 # print(hotel)
 # print(positive)
 # print(len(positive))

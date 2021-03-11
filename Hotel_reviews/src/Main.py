@@ -26,7 +26,7 @@ def feature_extraction(df, feature):
     neg_features = analyser.tf_idf(cleaned_neg_reviews)
     return pos_features, neg_features
 
-def start():
+def simple_recommend():
     pickle_in = open("../pickled_files/reviews.pickle","rb")
     df = pickle.load(pickle_in)
 
@@ -61,7 +61,7 @@ def start():
             break
         print("\n")
 
-def recommend():
+def advanced_recommend():
     pickle_in = open("../pickled_files/reviews.pickle","rb")
     df = pickle.load(pickle_in)
 

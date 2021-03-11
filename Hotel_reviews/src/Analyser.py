@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.tree import export_graphviz
 # from sklearn.externals.six import StringIO  
 from IPython.display import Image  
-
+from sklearn.linear_model import Lasso
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
@@ -19,6 +19,8 @@ from bs4 import BeautifulSoup
 
 import datetime
 import pickle
+
+
 
 class Trainer:
 
@@ -91,42 +93,46 @@ class Trainer:
             return feature_names[:5]
         except:
             return []
-        
-    def pos_neg_clf(self, X, y):
-        print("##########################################")
+
+    def create_vectorizer(self, X, y, max_features, min_df, info):
+        stop_words = nltk.corpus.stopwords.words('english')
+        stop_words = set(stopwords.words('english')) - set(['no'])
+
+        vectorizer = CountVectorizer(max_features=max_features, stop_words=stop_words)
+
+        # the number of times a particular feature words appears
+        X_transformed = vectorizer.fit_transform(X).toarray()
+
+        # Split dataset into training set and test set
+        X_train, X_test, y_train, y_test = train_test_split(X_transformed, y, test_size=0.2, random_state=1)
+
+        bag_of_words_package = [X_train, X_test, y_train, y_test, vectorizer, X_transformed]
+        pickle_out = open("../pickled_clfs/{}.pickle".format(info), "wb")
+        pickle.dump(bag_of_words_package, pickle_out)
+        pickle_out.close()
+
+        return X_train, X_test, y_train, y_test, vectorizer, X_transformed
+
+    def sentiment_clf(self, X_train, X_test, y_train, y_test, feature_cols):
+        print("------------------------------------------")
         now = datetime.datetime.now()
         print("{} : start training".format(now.strftime("%Y-%m-%d %H:%M:%S")))
 
-        vectorizer = CountVectorizer(max_features=200)
-        # the number of times a particular feature words appears
-        X = vectorizer.fit_transform(X).toarray()
-
-        # Number of words features here = total number of unique words in your dataset
-        feature_cols = vectorizer.get_feature_names()
-
-        # Split dataset into training set and test set
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
-
         # Create Decision Tree classifer object
-        clf = DecisionTreeClassifier(criterion="entropy", max_depth=5)
+        clf = DecisionTreeClassifier()
         # Train Decision Tree Classifer
         clf = clf.fit(X_train,y_train)
 
         now = datetime.datetime.now()
         print("{} : finished training".format(now.strftime("%Y-%m-%d %H:%M:%S")))
-        print("##########################################")
+        print("------------------------------------------")
 
-        pickle_out = open("../pickled_clfs/pos_neg_review_vectorizer.pickle","wb")
-        pickle.dump(vectorizer, pickle_out)
-        pickle_out.close()
-
-        pickle_out = open("../pickled_clfs/pos_neg_review_clf.pickle","wb")
+        pickle_out = open("../pickled_clfs/default_pos_neg_review_clf.pickle","wb")
         pickle.dump(clf, pickle_out)
         pickle_out.close()
 
-        print("Vectorizer and clf stored successfully!")
-        print("##########################################")
+        print("Clf stored successfully!")
+        print("------------------------------------------")
 
         # Predict the response for test dataset
         y_pred = clf.predict(X_test)
@@ -135,13 +141,13 @@ class Trainer:
         print(metrics.classification_report(y_test,y_pred))
         print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 
-        export_graphviz(clf, out_file="../{}/{}.dot".format("feature_clfs_tree", "pos_neg_review"),
+        export_graphviz(clf, out_file="../{}/{}.dot".format("default_clfs_tree", "pos_neg_review"),
                         filled=True, rounded=True,
                         special_characters=True,
                         feature_names = feature_cols,
                         class_names=['positive','nagative'])
+        print("------------------------------------------")
 
-        return vectorizer, clf
 
 class Predictor:
     def input_predictor(self,input_: list, vectorizer, clf) -> list:
