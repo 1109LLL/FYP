@@ -106,10 +106,10 @@ class Trainer:
         # Split dataset into training set and test set
         X_train, X_test, y_train, y_test = train_test_split(X_transformed, y, test_size=0.2, random_state=1)
 
-        bag_of_words_package = [X_train, X_test, y_train, y_test, vectorizer, X_transformed]
-        pickle_out = open("../pickled_clfs/{}.pickle".format(info), "wb")
-        pickle.dump(bag_of_words_package, pickle_out)
-        pickle_out.close()
+        # bag_of_words_package = [X_train, X_test, y_train, y_test, vectorizer, X_transformed]
+        # pickle_out = open("../pickled_clfs/{}.pickle".format(info), "wb")
+        # pickle.dump(bag_of_words_package, pickle_out)
+        # pickle_out.close()
 
         return X_train, X_test, y_train, y_test, vectorizer, X_transformed
 

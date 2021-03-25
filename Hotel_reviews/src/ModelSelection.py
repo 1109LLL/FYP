@@ -5,6 +5,7 @@ import nltk
 import numpy as np
 import datetime
 import matplotlib.pyplot as plt
+# import wandb
 
 from os import path
 from nltk.tokenize import word_tokenize, sent_tokenize, PunktSentenceTokenizer
@@ -18,6 +19,9 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn import metrics
 from sklearn import svm
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
 from DataProvider import Getter
 from Analyser import Trainer
 
@@ -135,7 +139,6 @@ def check_if_bag_of_words_package_exist(X, y):
 def create_document_term_matrix(X_transformed, vectorizer):
     return pd.DataFrame(X_transformed, columns=vectorizer.get_feature_names())
 
-
 def model_selection(clf, X_train, X_test, y_train, y_test):
     max_depths = np.linspace(1, 10, 5, endpoint=True)
     param_dist={
@@ -210,91 +213,7 @@ def evaluate_bag_of_words_max_features():
     print("{} : Process completed...".format(end.strftime("%Y-%m-%d %H:%M:%S")))
     print("Time taken : {}".format(end - start))
 
-def best_model():
-    print("------------------------------------------")
-    start = datetime.datetime.now()
-    print("{} : Begin process...".format(start.strftime("%Y-%m-%d %H:%M:%S")))
-
-    trainer = Trainer()
-    
-    X_path = "../pickled_files/X_training_set.pickle"
-    y_path = "../pickled_files/y_training_set_label.pickle"
-    pickle_in = open(X_path, "rb")
-    X = pickle.load(pickle_in)
-    pickle_in = open(y_path, "rb")
-    y = pickle.load(pickle_in)
-
-    max_feature = 50
-    info = "50_feature_vector"
-    min_df = None
-    X_train, X_test, y_train, y_test, vectorizer, X_transformed = trainer.create_vectorizer(X, y, max_feature, min_df, info)    
-
-    # Create Decision Tree classifer object
-    clf = DecisionTreeClassifier(criterion="gini", max_depth=10)
-    # Train Decision Tree Classifer
-    clf = clf.fit(X_train,y_train)
-
-    pickle_out = open("../pickled_clfs/best_pos_neg_review_clf.pickle","wb")
-    pickle.dump(clf, pickle_out)
-    pickle_out.close()
-
-    print("Clf stored successfully!")
-    print("------------------------------------------")
-
-    # Predict the response for test dataset
-    y_pred = clf.predict(X_test)
-
-    # Model Accuracy, how often is the classifier correct?
-    print(metrics.classification_report(y_test,y_pred))
-    print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
-    export_graphviz(clf, out_file="../{}/{}.dot".format("best_clfs_tree", "pos_neg_review"),
-                    filled=True, rounded=True,
-                    special_characters=True,
-                    feature_names = vectorizer.get_feature_names(),
-                    class_names=['positive','nagative'])
-    print("------------------------------------------")
-
-def SVM():
-    print("------------------------------------------")
-    start = datetime.datetime.now()
-    print("{} : Begin process...".format(start.strftime("%Y-%m-%d %H:%M:%S")))
-
-    trainer = Trainer()
-    
-    X_path = "../pickled_files/X_training_set.pickle"
-    y_path = "../pickled_files/y_training_set_label.pickle"
-    pickle_in = open(X_path, "rb")
-    X = pickle.load(pickle_in)
-    pickle_in = open(y_path, "rb")
-    y = pickle.load(pickle_in)
-
-    max_feature = 50
-    info = "50_feature_vector"
-    min_df = None
-    X_train, X_test, y_train, y_test, vectorizer, X_transformed = trainer.create_vectorizer(X, y, max_feature, min_df, info)
-    print("---------Test/Train set ready-------------------")
-
-    clf = svm.SVC()
-    clf.fit(X_train, y_train)
-
-    print("SVM Clf built")
-    print("------------------------------------------")
-    # Predict the response for test dataset
-    y_pred = clf.predict(X_test)
-
-    # Model Accuracy, how often is the classifier correct?
-    print(metrics.classification_report(y_test,y_pred))
-    print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
-    # export_graphviz(clf, out_file="../{}/{}.dot".format("best_clfs_tree", "pos_neg_review"),
-    #                 filled=True, rounded=True,
-    #                 special_characters=True,
-    #                 feature_names = vectorizer.get_feature_names(),
-    #                 class_names=['positive','nagative'])
-    print("------------------------------------------")
-
-def main():
+def decision_tree_model_selection_by_gridCV():
     print("------------------------------------------")
     start = datetime.datetime.now()
     print("{} : Begin process...".format(start.strftime("%Y-%m-%d %H:%M:%S")))
@@ -330,6 +249,196 @@ def main():
     print("{} : Process completed...".format(end.strftime("%Y-%m-%d %H:%M:%S")))
     print("Time taken : {}".format(end - start))
 
+def best_model():
+    print("------------------------------------------")
+    start = datetime.datetime.now()
+    print("{} : Begin process...".format(start.strftime("%Y-%m-%d %H:%M:%S")))
+
+    trainer = Trainer()
+    
+    X_path = "../pickled_files/X_training_set.pickle"
+    y_path = "../pickled_files/y_training_set_label.pickle"
+    pickle_in = open(X_path, "rb")
+    X = pickle.load(pickle_in)
+    pickle_in = open(y_path, "rb")
+    y = pickle.load(pickle_in)
+
+    max_feature = 50
+    info = "50_feature_vector"
+    min_df = None
+    X_train, X_test, y_train, y_test, vectorizer, X_transformed = trainer.create_vectorizer(X, y, max_feature, min_df, info)    
+
+    pickle_out = open("../best_clfs_tree/best_pos_neg_review_vectorizer.pickle","wb")
+    pickle.dump(vectorizer, pickle_out)
+    pickle_out.close()
+
+    # Create Decision Tree classifer object
+    clf = DecisionTreeClassifier(criterion="gini", max_depth=10)
+    # Train Decision Tree Classifer
+    clf = clf.fit(X_train,y_train)
+
+    pickle_out = open("../best_clfs_tree/best_pos_neg_review_clf.pickle","wb")
+    pickle.dump(clf, pickle_out)
+    pickle_out.close()
+
+    print("Clf stored successfully!")
+    print("------------------------------------------")
+
+    # Predict the response for test dataset
+    y_pred = clf.predict(X_test)
+
+    # Model Accuracy, how often is the classifier correct?
+    print(metrics.classification_report(y_test,y_pred))
+    print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+
+    export_graphviz(clf, out_file="../{}/{}.dot".format("best_clfs_tree", "pos_neg_review"),
+                    filled=True, rounded=True,
+                    special_characters=True,
+                    feature_names = vectorizer.get_feature_names(),
+                    class_names=['positive','nagative'])
+    print("------------------------------------------")
+
+def SVM():
+    print("------------------------------------------")
+    start = datetime.datetime.now()
+    print("{} : Begin process...".format(start.strftime("%Y-%m-%d %H:%M:%S")))
+
+    trainer = Trainer()
+    
+    X_path = "../pickled_files/X_training_set.pickle"
+    y_path = "../pickled_files/y_training_set_label.pickle"
+    pickle_in = open(X_path, "rb")
+    X = pickle.load(pickle_in)
+    pickle_in = open(y_path, "rb")
+    y = pickle.load(pickle_in)
+
+    data_range = [5000, 10000, 15000, 20000, 25000]
+    x_axis_points = [x*2 for x in data_range]
+    
+    train_accuracy = []
+    test_accuracy = []
+
+    for n in data_range:
+
+        small_X = X[:n] + X[-n:]
+        small_y = y[:n] + y[-n:]
+
+        max_feature = 50
+        info = "50_feature_vector_SVM"
+        min_df = None
+        X_train, X_test, y_train, y_test, vectorizer, X_transformed = trainer.create_vectorizer(small_X, small_y, max_feature, min_df, info)
+        print("---------Test/Train set ready-------------------")
+
+        clf = svm.SVC(kernel='linear', random_state=1)
+        clf.fit(X_train, y_train)
+
+        print("SVM Clf built")
+        print("------------------------------------------")
+
+        pickle_out = open("../SVM/pos_neg_SVM_clf_{}.pickle".format(n), "wb")
+        pickle.dump(clf, pickle_out)
+        pickle_out.close
+        print("SVM Clf saved")
+        print("------------------------------------------")
+
+        # Predict the response for test dataset
+        y_pred = clf.predict(X_test)
+
+        # Model Accuracy, how often is the classifier correct?
+        print(metrics.classification_report(y_test,y_pred))
+        test_acc = metrics.accuracy_score(y_test, y_pred)
+        print("Accuracy:",test_acc)
+        test_accuracy.append(test_acc)
+
+        # predict the resoinse for training dataset
+        y_train_pred = clf.predict(X_train)
+        train_acc = metrics.accuracy_score(y_train, y_train_pred)
+        train_accuracy.append(train_acc)
+
+        print("------------------------------------------")
+        end = datetime.datetime.now()
+        print("{} : Process completed...".format(end.strftime("%Y-%m-%d %H:%M:%S")))
+        print("Time taken : {}".format(end - start))
+        print("------------------------------------------")
+    
+    print("show plot...")
+    plt.plot(x_axis_points, train_accuracy, label="Train")
+    plt.plot(x_axis_points, test_accuracy, label="Test")
+    plt.ylabel("Accuracy")
+    plt.xlabel("Samples used")
+    plt.legend()
+    plt.title("Accuracy of SVM predictions with different number of samples used")
+    plt.show()
+
+def multiple_classifiers_comparison():
+    print("------------------------------------------")
+    start = datetime.datetime.now()
+    print("{} : Begin process...".format(start.strftime("%Y-%m-%d %H:%M:%S")))
+
+    trainer = Trainer()
+    
+    X_path = "../pickled_files/X_training_set.pickle"
+    y_path = "../pickled_files/y_training_set_label.pickle"
+    pickle_in = open(X_path, "rb")
+    X = pickle.load(pickle_in)
+    pickle_in = open(y_path, "rb")
+    y = pickle.load(pickle_in)
+
+    data_range = [5000, 10000, 15000, 20000, 25000]
+    x_axis_points = [x*2 for x in data_range]
+    
+    names = ["Decision Tree", "SVM", "Logistic Regression", "Random Forest", " Gaussian Naive Bayes"]
+
+    decision_tree = DecisionTreeClassifier(criterion="gini", random_state=1)
+    SVM = svm.SVC(kernel='linear', random_state=1)
+    logistic_regression = LogisticRegression(random_state=1)
+    random_forest = RandomForestClassifier(random_state=1)
+    gnb = GaussianNB()
+
+    classifiers = [decision_tree, SVM, logistic_regression, random_forest, gnb]
+
+    accuracy = []
+
+    for clf in classifiers:
+
+        acc_list = []
+        for n in data_range:
+            small_X = X[:n] + X[-n:]
+            small_y = y[:n] + y[-n:]
+
+            max_feature = 50
+            info = "50_feature_vector"
+            min_df = None
+            X_train, X_test, y_train, y_test, vectorizer, X_transformed = trainer.create_vectorizer(small_X, small_y, max_feature, min_df, info)
+            print("---------Test/Train set ready-------------------")
+
+            clf.fit(X_train, y_train)
+            y_pred = clf.predict(X_test)
+
+            acc = metrics.accuracy_score(y_test, y_pred)
+            acc_list.append(acc)
+        print("----------Next Classifier---------")
+
+        accuracy.append(acc_list)
+    
+    print("------------------------------------------")
+    end = datetime.datetime.now()
+    print("{} : Process completed...".format(end.strftime("%Y-%m-%d %H:%M:%S")))
+    print("Time taken : {}".format(end - start))
+    print("------------------------------------------")
+
+    print("show plot...")
+    for index, val in enumerate(accuracy):
+        plt.plot(x_axis_points, val, label=names[index])
+        
+    plt.ylabel("Accuracy")
+    plt.xlabel("Samples used")
+    plt.legend()
+    plt.title("Accuracy of predictions with 5 different classifiers")
+    plt.show()
+
+
+
 
 stop_words = nltk.corpus.stopwords.words('english')
 stop_words = set(stopwords.words('english')) - set(['no'])
@@ -338,3 +447,5 @@ stop_words = set(stopwords.words('english')) - set(['no'])
 # evaluate_bag_of_words_max_features()
 # best_model()
 SVM()
+# multiple_classifiers_comparison()
+

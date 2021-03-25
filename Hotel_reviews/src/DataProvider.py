@@ -11,7 +11,7 @@ class Getter:
     def getFeatureList(self):
         features = ["room","bed","location","bathroom","staff","staircase",
                     "park","hotel","building","style","transport","parking",
-                    "food","breakfast","lunch","dinner","restaurant"]
+                    "food","breakfast","lunch","dinner","restaurant", "bar"]
         return features
 
     def get_cleaned_reviews(self, review_type):
@@ -21,15 +21,15 @@ class Getter:
         return cleaned_reviews
 
     def getPosNegReviewsClf(self):
-        pickle_in = open("../pickled_clfs/pos_neg_review_vectorizer.pickle","rb")
+        pickle_in = open("../best_clfs_tree/best_pos_neg_review_vectorizer.pickle","rb")
         vectorizer = pickle.load(pickle_in)
-        pickle_in = open("../pickled_clfs/pos_neg_review_clf.pickle","rb")
+        pickle_in = open("../best_clfs_tree/best_pos_neg_review_clf.pickle","rb")
         clf = pickle.load(pickle_in)
         return vectorizer, clf
     
     def getCategories(self):
         categories = ["clean_room","nice_breakfast","good_location","friendly_staff","comfortable_bed",
-                      "value_for_money","parking", "wifi","nice_gym"]
+                      "value_for_money","parking", "wifi","nice_gym", "good_transport", "nice_bar"]
         return categories
     
     def getFullDataset(self):

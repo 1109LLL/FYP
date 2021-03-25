@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h3>Hotel List</h3>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Hotel Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in hotel_names %}
+                    <tr>
+                        <td><a href="report?select={{i}}"><button type="button" class="btn btn-outline-light text-dark"></button>{{i}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

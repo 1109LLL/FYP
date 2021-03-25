@@ -19,8 +19,10 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 from DataProcessor import Categorical
 from sklearn.model_selection import GridSearchCV
-
-
+from DataProvider import Getter
+from Analyser import Trainer
+from dtreeviz.trees import dtreeviz
+from matplotlib import pyplot as plt
 # words = ['minor','sandwich', 'able','private']
 # treebankTagger = nltk.data.load('taggers/maxent_treebank_pos_tagger/english.pickle')
 # pos_tagged = treebankTagger.tag(words)
@@ -128,20 +130,20 @@ def create_document_term_matrix(x, vectorizer):
 
 # clf = DecisionTreeClassifier()
 
-X_path = "../pickled_files/X_training_set.pickle"
-y_path = "../pickled_files/y_training_set_label.pickle"
-pickle_in = open(X_path, "rb")
-X = pickle.load(pickle_in)
-pickle_in = open(y_path, "rb")
-y = pickle.load(pickle_in)
+# X_path = "../pickled_files/X_training_set.pickle"
+# y_path = "../pickled_files/y_training_set_label.pickle"
+# pickle_in = open(X_path, "rb")
+# X = pickle.load(pickle_in)
+# pickle_in = open(y_path, "rb")
+# y = pickle.load(pickle_in)
 
-print(X[0])
-print(X[1])
-print(X[2])
-print(len(X))
-print(y[0])
-print(y[1])
-print(len(y))
+# print(X[0])
+# print(X[1])
+# print(X[2])
+# print(len(X))
+# print(y[0])
+# print(y[1])
+# print(len(y))
 
 # newtest()
 # cat = Categorical()
@@ -152,3 +154,29 @@ print(len(y))
 # print(len(positive))
 # print(negative)
 # print(len(negative))
+
+
+trainer = Trainer()
+    
+X_path = "../pickled_files/X_training_set.pickle"
+y_path = "../pickled_files/y_training_set_label.pickle"
+pickle_in = open(X_path, "rb")
+X = pickle.load(pickle_in)
+pickle_in = open(y_path, "rb")
+y = pickle.load(pickle_in)
+
+max_feature = 50
+info = "50_feature_vector"
+min_df = None
+X_train, X_test, y_train, y_test, vectorizer, X_transformed = trainer.create_vectorizer(X, y, max_feature, min_df, info)
+
+getter = Getter()
+vectorizer, clf = getter.getPosNegReviewsClf()
+fig = plt.figure(figsize=(25,20))
+
+viz = dtreeviz(clf, X_train, y_train,
+                target_name="target",
+                feature_names=vectorizer.get_feature_names(),
+                class_names=["positive","nagative"])
+
+fig.savefig("decistion_tree.png")

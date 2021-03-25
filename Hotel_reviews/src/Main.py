@@ -7,6 +7,7 @@ import glob
 from DataProcessor import FeatureReviewsExtractor, DataPreprocessing
 from Analyser import Trainer
 from DataProvider import Getter
+from DataProcessor import Categorical
 import datetime 
 
 
@@ -118,40 +119,10 @@ def advanced_recommend():
 # read_in_feature_clf("room")
 # train_pos_neg_review_clf()
 
-
-
-
-
-
-
-
-
-# path = "../data/Hotel_Reviews.csv"
-# columns_to_use = ["Hotel_Name","Positive_Review", "Negative_Review"]
-# df = read_file(path, columns_to_use)
-# pickle_out = open("../pickled_files/reviews.pickle","wb")
-# pickle.dump(df, pickle_out)
-# pickle_out.close()
-# pickle_in = open("../pickled_files/reviews.pickle","rb")
-# df = pickle.load(pickle_in)
-
-# hotel_list = df.Hotel_Name.unique()
-# sub_list = hotel_list[:3] # experiment with 5 hotels first
-
-# features = bag_of_words()
-
-# for each hotel, extract the different adj terms used in pos and neg reviews of a feature
-# hotel = {}
-# for i in tqdm(range(0,len(sub_list))):
-#     hotel_info = df.loc[df['Hotel_Name'] == sub_list[i]]
-    
-#     terms = {}
-#     for n in range(0,len(features[:3])):
-#         pos_terms, neg_terms = feature_extraction(hotel_info, features[n])
-#         terms[features[n]] = {'positive': pos_terms,
-#                               'negative': neg_terms}
-
-#     hotel[sub_list[i]] = {"features": terms}
+cat = Categorical()
+cat.labelling()
+# cat.hotel_with_most_labels()
+# cat.labelling_negatives()
 
 
 

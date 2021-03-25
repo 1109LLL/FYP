@@ -1,111 +1,114 @@
-Hotel_Name
-InterContinental London Park Lane
-Hotel L Antoine
-Mercure Paris Tour Eiffel Pont Mirabeau
-The Cranley Hotel
-Crowne Plaza Paris R publique
-Hotel des Tuileries Relais du Silence
-The Kensington Hotel
-Op ra Marigny
-Hotel Eden
-Ashburn Hotel
-Saint Georges Hotel
-La Tremoille Paris
-The Ritz London
-Hotel Xenia Autograph Collection
-Hotel Champs Elys es Friedland by Happyculture
-The Hoxton Holborn
-H tel Regina
-H tel Belloy Saint Germain By Happyculture
-H tel Le M
-H tel Paris Bastille Boutet MGallery by Sofitel
-L Edmond H tel
-Sansi Diputacio
-Grange Beauchamp Hotel
-H tel Vernet
-The One Barcelona GL
-Le Pavillon de la Reine Spa
-Bloomsbury Palace Hotel
-Hotel Square
-H tel Bourgogne Montana by MH
-Holiday Inn Paris Op ra Grands Boulevards
-Le Belmont Champs Elys es
-BoB Hotel by Elegancia
-The Marble Arch London
-Prince de Galles a Luxury Collection hotel Paris
-H tel D Aubusson
-Grange Clarendon Hotel
-My Chelsea
-Hotel Claridge Paris
-Dorset Square Hotel
-DoubleTree by Hilton Hotel London Marble Arch
-Monsieur Cadet Hotel Spa Ex Meyerhold Spa 
-La Suite West Hyde Park
-Le Tsuba Hotel
-The Marylebone Hotel
-Washington Mayfair Hotel
-H tel Mansart Esprit de France
-Residence Henri IV
-Best Western Le 18 Paris
-Hotel Montaigne
-H tel Balzac
-Le Relais Montmartre
-AC Hotel Paris Porte Maillot by Marriott
-Hotel VIU Milan
-The Piccadilly London West End
-Best Western Hotel Montmartre Sacr Coeur
-Hotel Le Chat Noir
-Hotel de Nell
-Hotel West End
-La Maison Champs Elys es
-Adria Boutique Hotel
-Best Western Premier Faubourg 88
-Mercure Paris Opera Louvre
-Radisson Blu Edwardian Kenilworth
-Hotel Bellevue Wien
-Catalonia Port
-Hotel Ciutadella Barcelona
-Sansi Pedralbes
-ABaC Restaurant Hotel Barcelona GL Monumento
-The Capital
-The Westbury A Luxury Collection Hotel Mayfair London
-Hotel Sans Souci Wien
-Chasse Hotel
-Eurostars Monumental
-Hotel Crivi s
-Ako Suites Hotel
-HCC St Moritz
-Ambassade Hotel
-Hotel J ger
-Small Luxury Hotel Altstadt Vienna
-Park Plaza Vondelpark Amsterdam
-Hotel Dieci
-Ilunion Bel Art
-Hotel Gran Derby Suites
-Holiday Inn Vienna City
-Pakat Suites Hotel
-Hotel Die Port van Cleve
-Abba Sants
-COMO Metropolitan London
-Monument Hotel
-Hotel Front Maritim
-Duquesa de Cardona
-Hotel The Serras
-TownHouse 12
-Sheraton Grand London Park Lane
-Hotel du Louvre in the Unbound Collection by Hyatt
-Hotel Miramar Barcelona GL
-Pulitzer Amsterdam
-Dikker en Thijs Fenice Hotel
-Attica 21 Barcelona Mar
-Roger de Ll ria
-Catalonia Square 4 Sup
-Hyatt Regency Amsterdam
-Hotel Zeitgeist Vienna Hauptbahnhof
-H10 Cubik 4 Sup
-Hotel Capitol Milano
-Admiral Hotel
-Four Seasons Hotel Milano
-TH Street Duomo
-AC Hotel Milano a Marriott Lifestyle Hotel
-Sheraton Diana Majestic
+Hotel_Name,Descriptions
+Monhotel Lounge SPA,"['wasn', 'excellent', 'move', 'leave', 'necessary', 'non', 'great', 'nice', 'hear', 'quite', 'get', 'round', 'responsive', 'accessible', 'due', 'easy']"
+InterContinental London Park Lane,"['helpful', 'amazing', 'young', 'baby']"
+Maison Souquet,"['hopeless', 'high', 'experienced', 'rough', 'friendly', 'pitch', 'poor', 'small']"
+Hotel des Tuileries Relais du Silence,"['i', 'metro', 'be', 'clean', 'excellent']"
+The Kensington Hotel,"['helpful', 'general', 'happy']"
+Op ra Marigny,"['answer', 'able']"
+Hotel Eden,"['be', 'excellent', 'local']"
+Ashburn Hotel,['breakfast']
+Saint Georges Hotel,"['fantastic', 'great', 'be', 'few', 'reserve', 'aware']"
+La Tremoille Paris,"['added', 'perfect', 'excellent', 'detail']"
+Hotel Xenia Autograph Collection,"['great', 'helpful', 'tube', 'transport', 'polite', 'public', 'lovely', 'economical', 'local']"
+Villa Eugenie,"['find', 'impressive', 'clean', 'central', 'accessible', 'much']"
+Hotel Plaza Elys es,"['decent', 'good', 'free', 'underground', 'modern', 'excellent']"
+Hotel Champs Elys es Friedland by Happyculture,"['available', 'small']"
+Best Western Paris Gare Saint Lazare,"['do', 'new', 'pillow']"
+Le Narcisse Blanc Spa,"['nice', 'new', 'little', 'soft', 'young', 'perfect', 'take', 'suggest', 'small', 'acceptable', 'feel', 'hard', 'say', 'expensive', 'remind', 'high', 'be', 'helpful', 'good', 'basement', 'first', 'noisy', 'comfortable', 'short']"
+The Hoxton Holborn,"['perfect', 'easy', 'helpfull']"
+H tel Regina,"['available', 'excellent']"
+H tel Belloy Saint Germain By Happyculture,"['plunge', 'next', 'great', 'nice', 'positive', 'helpful', 'clean', 'main', 'get', 'excellent', 'extra']"
+H tel Le M,"['nice', 'clean', 'excellent']"
+H tel Paris Bastille Boutet MGallery by Sofitel,"['new', 'nice', 'many', 'close', 'quiet', 'acceptable', 'quick', 'reasonable', 'french', 'warm', 'fantastic', 'street', 'be', 'helpful', 'wonderful', 'exceptional', 'private', 'local', 'huge', 'metro', 'cheerful', 'comfortable', 'modern']"
+L Edmond H tel,"['metro', 'recommend', 'great', 't', 'helpful', 'clean', 'polite', 'spacious']"
+Grange Beauchamp Hotel,"['theatreland', 'good', 'reasonable', 'high', 'nearby', 'sight', 'theatre', 'easy', 'spacious', 'quiet']"
+H tel Vernet,"['beautiful', 'pleasant', 'useful']"
+The One Barcelona GL,"['quiet', 'stay', 'beautiful', 'hot', 'lovely', 'easy', 'excellent', 'short']"
+Le Pavillon de la Reine Spa,"['complimentary', 'convenient', 'tranquil', 'own']"
+Bloomsbury Palace Hotel,"['such', 'local']"
+Royal Saint Michel,"['hotel', 'good', 'fourth', 'provide', 'great', 't', 'find', 'give', 'other', 'be', 'clean', 'info', 'friendly', 'many', 'public', 'have', 'much', 'excellent']"
+Hotel Square,"['several', 'super', 'such', 'helpful', 'other', 'agreeable', 'everywhere', 'lead', 'private', 'positive']"
+H tel Bourgogne Montana by MH,"['sandman', 'good', 'super', 'comfy', 'clean', 'electronic', 'wish', 'quiet', 'friendly', 'public', 'excellent', 'safe']"
+Holiday Inn Paris Op ra Grands Boulevards,"['good', 'big']"
+Le Belmont Champs Elys es,"['next', 'spa', 'fantastic', 'underground', 'great', 'remember', 'safe']"
+BoB Hotel by Elegancia,"['charming', 'nice', 'little', 'main', 'many', 'croissant', 'easy', 'quiet', 'reasonable', 'elaborate', 'find', 'choose', 'parking', 'able', 'expensive', 'resto', 'stay', 'helpful', 'change', 'clean', 'friendly', 'accessible', 'spacious', 'light', 'great', 'unlimited', 'comfortable', 'have', 'modern', 'excellent']"
+The Marble Arch London,"['next', 'visit', 'fantastic', 'nice', 'main', 'perfect', 'friendly']"
+Prince de Galles a Luxury Collection hotel Paris,[]
+H tel D Aubusson,"['attentive', 'good', 'helpful', 'comfortable', 'friendly', 'available', 'excellent', 'local']"
+ME London by Melia,"['expensive', 'good', 'drink', 'nightmare', 'get']"
+Grange Clarendon Hotel,"['free', 'efficient', 'underground', 'helpful', 'comfortable', 'quiet', 'possible']"
+Hotel Claridge Paris,"['several', 'underground', 'get', 'easy', 'spacious']"
+DoubleTree by Hilton Hotel London Marble Arch,"['good', 'marble', 'opposite', 'take', 'use', 'large']"
+Monsieur Cadet Hotel Spa Ex Meyerhold Spa ,"['remind', 'nearby', 'helpful', 'friendly', 'available']"
+La Suite West Hyde Park,"['make', 'great', 'feel', 'suitable', 'modern', 'excellent', 'local']"
+Le Tsuba Hotel,"['deduct', 'great', 'new', 'be', 'parking']"
+The Marylebone Hotel,"['close', 'easy', 'pleasant', 'bars']"
+H tel Pont Royal,"['great', 'nice', 'nearby', 'public', 'get']"
+Washington Mayfair Hotel,"['good', 'high', 'nice', 'comfy', 'friendly', 'local']"
+H tel Mansart Esprit de France,"['other', 'public', 'comfortable', 'easy']"
+Residence Henri IV,"['visit', 'reasonable', 'fantastic', 'great', 'landmarks', 'stay', 'cheap', 'comfortable', 'open', 'eat', 'favorite']"
+Best Western Le 18 Paris,"['good', 'warm', 'presented', 'little', 'clean', 'comfortable', 'small']"
+Fifty Four Boutique Hotel,"['great', 'isn', 'be']"
+H tel Balzac,"['normal', 'friendly', 'comfortable']"
+Le Relais Montmartre,"['genuine', 'great', 'many']"
+AC Hotel Paris Porte Maillot by Marriott,"['several', 'light', 'check', 'good', 'convenient', 'metro', 'small', 'perfect', 'big', 'friendly', 'many', 'private', 'inner', 'large', 'local']"
+Hotel VIU Milan,"['understand', 'do', 'new', 'trained', 'be', 'professional', 'enough', 'have', 'wrong']"
+Nell Hotel Suites,"['great', 'parking', 'accomodating', 'find']"
+Best Western Hotel Montmartre Sacr Coeur,"['terrible', 'last', 'dry', 'first', 'allow', 'straighten', 'hot']"
+Hotel Le Chat Noir,"['functional', 'small']"
+H tel Bel Ami,['excellent']
+Hotel de Nell,"['fresh', 'delicious', 'stylish', 'japanese', 'typical', 'quiet', 'sizeable', 'full', 'nearby', 'wall', 'helpful', 'clean', 'friendly', 'large', 'extra', 'comfortable', 'normal', 'modern', 'rental']"
+Hotel West End,"['good', 'tasty', 'common', 'big', 'such', 'small']"
+H tel Montmartre Mon Amour,"['next', 'available', 'deluxe', 'silent', 'other', 'superb', 'clean', 'impressive', 'few', 'romantic', 'friendly', 'private', 'cafes', 'small']"
+La Maison Champs Elys es,"['good', 'courteous', 'fantastic', 'helpful', 'cheap', 'perfect', 'abd', 'easy']"
+Adria Boutique Hotel,"['brought', 'super', 'fresh', 'provide', 'free', 't', 'soft', 'helpful', 'fine', 'own', 'polite', 'lovely', 'thoughtful', 'ready']"
+Best Western Premier Faubourg 88,"['catch', 'find', 'busy', 'tell', 'bother', 'rush']"
+Mercure Paris Opera Louvre,"['expensive', 'slow', 'small']"
+Radisson Blu Edwardian Kenilworth,"['super', 'brilliant', 'cold', 'main', 'close', 'stand', 'small', 'convenient', 'see', 'cardboard', 'forgetful', 'chaotic', 'be', 'british', 'get', 'inconvenient', 'sit', 'worn', 'tall', 'liquid', 'painful', 'comfortable', 'drafty', 'such']"
+Catalonia Port,"['pleasant', 'nice', 'low', 'available', 'close', 'quiet', 'safe', 'real', 'balcony', 'outstanding', 'old', 'major', 'be', 'helpful', 'other', 'secure', 'long', 'good', 'late', 'relax', 'excellent']"
+Hotel Ciutadella Barcelona,"['expensive', 'special', 'be', 'have', 't', 'park', 'comfortable', 'deliver', 'private', 'old', 'short']"
+ABaC Restaurant Hotel Barcelona GL Monumento,[]
+The Capital,"['friendly', 'great', 'fabulous']"
+The Westbury A Luxury Collection Hotel Mayfair London,"['great', 'expect', 'intended', 'excellent']"
+Hotel Sans Souci Wien,['great']
+Chasse Hotel,"['nice', 'be', 'comfortable', 'available', 'spacious']"
+U232 Hotel,"['park', 'easy', 'underground']"
+Hotel Crivi s,"['helpful', 'snap', 'comfortable', 'friendly', 'got']"
+HCC St Moritz,"['only', 't', 'bring']"
+Hotel Casa Camper,"['several', 'french', 'late', 'complimentary', 'separate', 'private', 'quiet', 'favorite']"
+Hotel J ger,"['good', 'nice', 'helpful', 'cheap', 'clean', 'garden', 'public']"
+Am Spiegeln,"['ouside', 'good', 'nice', 'silent', 'friendly', 'big', 'polite', 'strong', 'easy', 'spacious', 'large']"
+Small Luxury Hotel Altstadt Vienna,"['excellent', 'good', 'make', 'free', 'arrival', 'possible', 'fine', 'helpful', 'sure', 'comfortable', 'old', 'available', 'important', 'short']"
+Park Plaza Vondelpark Amsterdam,"['good', 'rental']"
+Hotel Dieci,"['outside', 'friendly', 'italian', 'good']"
+Ilunion Bel Art,"['great', 'clean', 'comfortable']"
+Hotel Gran Derby Suites,['helpful']
+Holiday Inn Vienna City,"['good', 'comfortable', 'excellent', 'extra']"
+Pakat Suites Hotel,"['good', 'convenient', 'personal', 'make', 'free', 'new', 'nice', 'delicious', 'professional', 'main', 'friendly', 'comfortable', 'clean', 'big', 'worth', 'many', 'available', 'quiet']"
+Hotel Die Port van Cleve,"['friendly', 'overnight']"
+Abba Sants,"['nearby', 'excellent', 'free']"
+COMO Metropolitan London,"['general', 'good', 'easy', 'minimalistic', 'final', 'helpful', 'comfortable', 'public', 'live', 'modern', 'excellent']"
+Sall s Hotel Pere IV,"['terrible', 'decent', 'good', 'varied', 'eur', 'steep', 'nice', 'clean', 'few', 'comfortable', 'ask', 'isn', 'get', 'excellent']"
+Monument Hotel,"['great', 'junior', 'remember', 'whole', 'perfect', 'secret', 'knowledgeable', 'flexible']"
+Hotel The Serras,"['helpful', 'superb', 'public', 'reasonable']"
+TownHouse 12,"['good', 'free', 'great', '50th', 'finding', 'help', 'willing', 'perfect', 'common']"
+Hotel Sunflower,"['good', 'convenient', 'free', 'nice', 'clean', 'private', 'spacious']"
+Sheraton Grand London Park Lane,"['fantastic', 'great', 'new', 'nice', 'stay', 'helpful', 'other']"
+Hotel du Louvre in the Unbound Collection by Hyatt,"['fast', 'drive', 'be', 'helpful', 'polite', 'hard']"
+Hotel Miramar Barcelona GL,"['fresh', 'plentiful', 'fantastic', 'great', 'excellent']"
+Pulitzer Amsterdam,['public']
+Dikker en Thijs Fenice Hotel,"['next', 'european', 'likely', 'pricey', 'tram', 'little', 'right', 'few', 'hard', 'choose', 's', 'clean', 'friendly', 'front', 'large', 'daily', 'great', 'amsterdam', 'beat', 'excellent']"
+Roger de Ll ria,['happy']
+Catalonia Square 4 Sup,"['recommend', 'onsite', 'knowledgable', 'fair', 'perfect', 'use', 'friendly', 'sit', 'able']"
+Hyatt Regency Amsterdam,"['nice', 'start', 't', 'few', 'pay']"
+H10 Cubik 4 Sup,"['free', 'outside', 'couldn', 'recommend', 'handy', 'have', 'helpful', 'anniversary', 'celebrate']"
+Hotel Capitol Milano,"['hotel', 'good', 'enter', 'convenient', 'difficult', 'comfortable', 'welcoming', 'short']"
+Admiral Hotel,['perfect']
+Hotel Magna Pars Small Luxury Hotels of the World,"['nice', 'big']"
+Four Seasons Hotel Milano,"['several', 'check', 'last', 'external', 'new', 'right', 'electronic', 'front', 'happy']"
+Hotel Silver,"['external', 'pleasant', 'reach', 'nice', 'central', 'quiet', 'convenient', 'find', 'spar', 'parking', 'free', 'be', 'enough', 'secure', 'friendly', 'ok', 'spacious', 'large', 'good', 'comfortable', 'easy']"
+TH Street Duomo,"['expensive', 'good', 'extra', 'recommend', 'leave', 'public', 'little', 'stay', 'perfect', 'few', 'separate', 'spacious', 'safe']"
+AC Hotel Milano a Marriott Lifestyle Hotel,"['check', 'make', 'incredible', 'second', 'do', 'finalise', 'new', 'spent', 'first', 'be', 'young', 'resolve', 'work', 'parking', 'wrong', 'much']"
+Hotel Tiziano Park Vita Parcour Gruppo MiniHotels,"['next', 'nice', 'covered', 'supportive', 'strategic', 'guite', 'professional', 'practical', 'average', 'clean', 'secure', 'friendly', 'ok', 'get', 'lovely', 'good', 'metro', 'great', 'continental', 'rural', 'easy', 'excellent']"
+Sheraton Diana Majestic,"['luxurious', 'next', 'excellent', 'good', 'huge', 'great', 'relaxed', 'stay', 'clean', 'sure', 'mixed', 'mot', 'old', 'ready']"
+Strandhotel Alte Donau,"['next', 'bus', 'fine', 'little', 'big', 'close', 'available', 'easy', 'quiet', 'convenient', 'reasonable', 'forget', 'professional', 'u1', 'public', 's', 'free', 'go', 'helpful', 'clean', 'standard', 'spacious', 'usual', 'good', 'fast', 'great', 'garden', 'subway', 'excellent']"

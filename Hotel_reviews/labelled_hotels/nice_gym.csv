@@ -1,44 +1,61 @@
-Hotel_Name
-Park Plaza County Hall London
-Grange St Paul s Hotel
-The Grosvenor
-Holiday Inn London Stratford City
-DoubleTree by Hilton London Hyde Park
-Hilton London Metropole
-Blakemore Hyde Park
-Millennium Gloucester Hotel London
-Grange Tower Bridge Hotel
-The Marylebone Hotel
-The Piccadilly London West End
-Kingsway Hall Hotel
-Corendon Vitality Hotel Amsterdam
-Hilton Vienna
-Apollo Hotel Amsterdam
-Axel Hotel Barcelona Urban Spa Adults Only
-Jaz Amsterdam
-Best Western Premier Hotel Couture
-St Pancras Renaissance Hotel London
-DoubleTree By Hilton London Excel
-Hilton London Kensington Hotel
-Room Mate Aitana
-Fleming s Selection Hotel Wien City
-NH Collection Milano President
-Mercure Amsterdam Sloterdijk Station
-Apex City Of London Hotel
-Aloft London Excel
-Ham Yard Hotel
-Hampton by Hilton Amsterdam Centre East
-Monument Hotel
-Hotel SB Diagonal Zero Barcelona 4 Sup
-art otel Amsterdam
-Andaz Amsterdam Prinsengracht A Hyatt Hotel
-Lindner Hotel Am Belvedere
-Austria Trend Hotel Savoyen Vienna
-Hilton London Canary Wharf
-The May Fair Hotel
-Imperial Riding School Renaissance Vienna Hotel
-Starhotels Business Palace
-Radisson Blu Hotel Milan
-Bianca Maria Palace Hotel
-Grand Visconti Palace
-Park Plaza Westminster Bridge London
+Hotel_Name,Descriptions
+Park Plaza County Hall London,"['great', 'nice', 'big']"
+InterContinental London Park Lane,"['nice', 'good']"
+Grange St Paul s Hotel,"['spa', 'cathedral', 'modern']"
+The Grosvenor,['nice']
+Holiday Inn London Stratford City,"['good', 'spacious']"
+DoubleTree by Hilton London Hyde Park,"['good', 'appreciated', 'token', 'friendly', 'small']"
+Hotel The Peninsula Paris,"['bad', 'light', 't', 'get', 'outstanding']"
+Novotel Paris Gare De Lyon,"['nice', 'excellent']"
+Hilton London Metropole,['nice']
+Park Plaza Victoria London,[]
+Club Quarters Hotel St Paul s,"['terrific', 'nice', 'gym', 'stylish']"
+Blakemore Hyde Park,"['clean', 'quiet', 'small', 'little']"
+Millennium Gloucester Hotel London,['daily']
+St James Court A Taj Hotel London,"['fantastic', 'nice', 'indian']"
+Grange Tower Bridge Hotel,"['amazing', 'spa', 'great', 'nice', 'stay', 'comfortable', 'long', 'quiet']"
+The Marylebone Hotel,"['friendly', 'comfortable']"
+Oceania Paris Porte De Versailles,[]
+DoubleTree by Hilton London Islington,[]
+The Piccadilly London West End,"['make', 'nice', 'silent', 'special', 'care', 'stay', 'perfect', 'comfortable', 'central', 'long', 'know', 'excellent']"
+Kingsway Hall Hotel,['comfortable']
+Corendon Vitality Hotel Amsterdam,"['friendly', 'quiet']"
+Hilton Vienna,['nice']
+Apollo Hotel Amsterdam,"['good', 'enjoy', 'furnished', 'great', 'nice', 'whole', 'help', 'willing', 'long']"
+Axel Hotel Barcelona Urban Spa Adults Only,['helpful']
+Jaz Amsterdam,"['awesome', 'nice', 'good', 'comfortable']"
+Best Western Premier Hotel Couture,"['squat', 'routine', 'flat', 'do', 'adjustable', 'nice', 'full', 'go', 'help', 'friendly', 'many', 'get', 'eat', 'excellent', 'stop']"
+Holiday Inn London Wembley,"['stadium', 'underground', 'nice', 'mini', 'clean', 'enough']"
+St Pancras Renaissance Hotel London,"['helpful', 'pool', 'quiet']"
+DoubleTree By Hilton London Excel,"['expensive', 'free', 'nice', 'silent', 'comfortable', 'open', 'choose', 'included']"
+WestCord Fashion Hotel Amsterdam,"['excellent', 'warm', 'nice', 'be', 'friendly', 'modern', 'large']"
+Hilton London Kensington Hotel,"['quick', 'nice', 'easy', 'spacious']"
+Room Mate Aitana,"['double', 'good', 'great', 'late', 'large', 'small', 'nice', 'quite', 'comfortable', 'friendly', 'excellent']"
+Fleming s Selection Hotel Wien City,"['helpful', 'check', 'decent', 'nice']"
+NH Collection Milano President,"['nice', 'trained', 'excellent', 'central']"
+Mercure Amsterdam Sloterdijk Station,"['great', 'nice', 'comfortable']"
+ARCOTEL Wimberger,['clean']
+Apex City Of London Hotel,"['great', 'nice', 'central']"
+Aloft London Excel,"['good', 'nice', 'helpful', 'superb', 'pool', 'central', 'massive', 'excel']"
+Ham Yard Hotel,"['great', 'junior', 'nice', 'specious']"
+Hampton by Hilton Amsterdam Centre East,"['comfortable', 'quiet', 'central']"
+Monument Hotel,"['amazing', 'excellent', 'fresh', 'high', 'nice', 'delicious', 'gym', 'clean', 'tasteful', 'separate', 'satisfied', 'small', 'extra']"
+Best Western Plus Hotel Galles,"['direct', 'great', 'pillow']"
+Hotel SB Diagonal Zero Barcelona 4 Sup,"['light', 'snooze', 'nice', 'great', 'professional', 'commercial', 'comfortable', 'big', 'use', 'friendly']"
+art otel Amsterdam,"['good', 'super', 'great', 'nice', 'top', 'helpful', 'clean', 'sauna', 'friendly', 'lovely', 'modern', 'excellent']"
+Andaz Amsterdam Prinsengracht A Hyatt Hotel,"['spa', 'nice', 'delicious', 'wonderful', 'perfect']"
+Catalonia Park Putxet,"['rooftop', 'nice', 'helpful', 'comfortable', 'have']"
+Lindner Hotel Am Belvedere,"['comfy', 'nice']"
+Austria Trend Hotel Savoyen Vienna,"['helpful', 'nice', 'large']"
+Hyatt Regency Amsterdam,"['sound', 'nice']"
+Hilton London Canary Wharf,"['overall', 'good', 'spacious', 'big']"
+The May Fair Hotel,"['fantastic', 'nice']"
+Imperial Riding School Renaissance Vienna Hotel,"['clean', 'comfortable', 'good']"
+Art Hotel Navigli,['great']
+Starhotels Business Palace,"['nice', 'attentive']"
+Radisson Blu Hotel Milan,"['clean', 'knowledgeable', 'indoor']"
+Bianca Maria Palace Hotel,"['good', 'nice', 'helpful', 'bathrooms', 'included']"
+Starhotels Tourist,"['nice', 'metro']"
+Grand Visconti Palace,"['nice', 'good', 'centre']"
+Park Plaza Westminster Bridge London,"['good', 'outside', 'fantastic', 'nice', 'tiny', 'helpful', 'see', 'walk', 'perfect', 'friendly', 'comfortable', 'main', 'spacious']"
+The Student Hotel Amsterdam City,"['metro', 'new', 'nice', 'accessible', 'clean', 'sound', 'modern', 'rental']"

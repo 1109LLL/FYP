@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h3>{{hotel_name}} Report</h3>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Average Rating</th>
+                    <th scope="col">Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{average_rating.0}}</td>
+                    <td>{{location.0}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table tabe-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Nationality of customers who generally enjoyed the stay:</th>
+                    <th scope="col">Average score given</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer_bg in nationality_score %}
+                    <tr>
+                        <td>{{customer_bg.0}}</td>
+                        <td>{{customer_bg.1}}</td>
+                    </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Feature</th>
+                    <th scope="col">Key reviews</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feature_item in features %}
+                    <tr>
+                        <td>{{feature_item.0}}</td>
+                        <td>{{feature_item.1.0}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
