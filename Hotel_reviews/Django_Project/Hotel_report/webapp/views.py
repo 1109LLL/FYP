@@ -15,7 +15,7 @@ def index(request):
 
 def report(request):
     hotel_selected = request.GET.get('select')
-
+    
     full_dataset = pd.read_csv("../../data/Hotel_Reviews.csv")
 
     # average rating
@@ -29,16 +29,18 @@ def report(request):
     address = name_address['Hotel_Address'].unique().tolist()
 
     # favoured by customers from
-    name_nationality_score = full_dataset[['Hotel_Name', 'Reviewer_Nationality', 'Reviewer_Score']].copy()
-    name_nationality_score = name_nationality_score.loc[name_nationality_score['Hotel_Name']==hotel_selected]
-    nationality_score = name_nationality_score.groupby(['Reviewer_Nationality']).mean()
-    print("======={}".format(nationality_score.columns.tolist()))
-    nationality_score = nationality_score.sort_values(by='Reviewer_Score', ascending=False)
+    pos_name_nationality_score = full_dataset[['Hotel_Name', 'Reviewer_Nationality', 'Reviewer_Score']].copy()
+    pos_name_nationality_score = pos_name_nationality_score.loc[pos_name_nationality_score['Hotel_Name']==hotel_selected]
+    pos_nationality_score = pos_name_nationality_score.groupby('Reviewer_Nationality', as_index=False).mean().sort_values(by='Reviewer_Score', ascending=False)
+    pos_nationality_score = pos_nationality_score.loc[pos_nationality_score['Reviewer_Score'] >= 8,:]
+    pos_nationality_score = pos_nationality_score.values.tolist()
     
-    nationality_score = nationality_score.loc[nationality_score['Reviewer_Score'] >= 9,:]
-    
-    # nationality_score = nationality_score['Reviewer_Nationality'].tolist()
-    
+    # disliked by customers from
+    neg_name_nationality_score = full_dataset[['Hotel_Name', 'Reviewer_Nationality', 'Reviewer_Score']].copy()
+    neg_name_nationality_score = neg_name_nationality_score.loc[neg_name_nationality_score['Hotel_Name']==hotel_selected]
+    neg_nationality_score = neg_name_nationality_score.groupby('Reviewer_Nationality',as_index=False).mean().sort_values(by='Reviwer_Score', ascending=False)
+    neg_nationality_score = neg_nationality_score.loc[neg_nationality_score['Reviewer_Score'] <= 2,:]
+    neg_nationality_score = neg_nationality_score.values.tolist()
 
     # feature comments
     features = ["room","bed","location","bathroom","staff","staircase",
@@ -69,7 +71,8 @@ def report(request):
         'features':feature_info,
         'average_rating':average_rating,
         'location':address,
-        'nationality_score':nationality_score
+        'pos_nationality_score':pos_nationality_score,
+        'neg_nationality_score':neg_nationality_score
     }
 
     return render(request, 'report.html', context)    

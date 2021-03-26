@@ -24,18 +24,21 @@
         <table class="table tabe-hover">
             <thead>
                 <tr>
-                    <th scope="col">Nationality of customers who generally enjoyed the stay:</th>
+                    <th scope="col">Nationality of customers who generally enjoyed the stay (Average score >= 8):</th>
+                    <th scope="col">Average score given</th>
+                    <th scope="col">Nationality of customers who generally disliked the stay (Average score <= 2):</th>
                     <th scope="col">Average score given</th>
                 </tr>
             </thead>
             <tbody>
-                {% for customer_bg in nationality_score %}
+                {% for pos_customer_bg in pos_nationality_score %}
                     <tr>
-                        <td>{{customer_bg.0}}</td>
-                        <td>{{customer_bg.1}}</td>
+                        <td>{{pos_customer_bg.0}}</td>
+                        <td>{{pos_customer_bg.1}}</td>
+                        <td>{{neg_nationality_score}}</td>
+                        <td>{</td>
                     </tr>
                 {% endfor %}
-                
             </tbody>
         </table>
     </div>
