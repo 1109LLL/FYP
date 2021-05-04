@@ -1,26 +1,33 @@
 import pandas as pd
 import re
 import nltk
+import datetime
+import pickle
 
 from nltk.tokenize import word_tokenize, sent_tokenize, PunktSentenceTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+
+# ML algorithms
+from sklearn.linear_model import Lasso
+from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
+
+# Data preprocessing
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.tree import export_graphviz
-# from sklearn.externals.six import StringIO  
-from IPython.display import Image  
-from sklearn.linear_model import Lasso
-import pandas as pd
-from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 from sklearn.model_selection import train_test_split # Import train_test_split function
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
+from sklearn.tree import export_graphviz
+# from sklearn.externals.six import StringIO  
+
 from bs4 import BeautifulSoup
+from collections import Counter
+from IPython.display import Image  
 
-import datetime
-import pickle
-
-
+from DataProvider import Getter
+from pandas.core.common import flatten
 
 class Trainer:
 
@@ -149,8 +156,128 @@ class Trainer:
         print("------------------------------------------")
 
 
+
+    def form_training_set_for_sentiment_clf_decision_tree(self):
+        getter = Getter()
+        hotel_list = getter.getHotelList()
+
+        pos_val = []
+        neg_val = []
+        # Extract the positive and negative dictionaries (noun and adj) from each hotel
+        # obtain a list of only the values
+        for hotel in hotel_list.values:
+            hotel_name = hotel[0]
+
+            pos_dict = getter.get_pos_noun_adj_dict_of_hotel(hotel_name)
+            pos_values_list = list(pos_dict.values())
+            for value in pos_values_list:
+                if len(value) == 1:
+                    pos_val.append(value[0])
+                else:
+                    pos_val.append(' '.join(value))
+
+
+            neg_dict = getter.get_neg_noun_adj_dict_of_hotel(hotel_name)
+            neg_values_list = list(neg_dict.values())
+            for value_ in neg_values_list:
+                if len(value_) == 1:
+                    neg_val.append(value_[0])
+                else:
+                    neg_val.append(' '.join(value_))
+
+        y_pos_label = [1] * len(pos_val)
+        y_neg_label = [0] * len(neg_val)    
+        
+        X = pos_val + neg_val
+        y = y_pos_label + y_neg_label
+
+        return X, y
+
+    def fit_training_set_using_tfidf_vectorizer(self):
+        print("------------------------------------------")
+        now = datetime.datetime.now()
+        print("{} : start fitting tfidf".format(now.strftime("%Y-%m-%d %H:%M:%S")))
+
+        getter = Getter()
+        X, y = getter.get_training_set_for_sentiment_clf_decision_tree()
+        
+        tfIdfVectorizer = TfidfVectorizer(use_idf=True)
+        X_tfidf = tfIdfVectorizer.fit_transform(X)
+
+        now = datetime.datetime.now()
+        print("{} : finished fit_transform".format(now.strftime("%Y-%m-%d %H:%M:%S")))
+        print("------------------------------------------")
+
+        return X_tfidf, tfIdfVectorizer
+
+
+    def train_sentiment_clf_decision_tree(self):
+        print("------------------------------------------")
+        now = datetime.datetime.now()
+        print("{} : start training".format(now.strftime("%Y-%m-%d %H:%M:%S")))
+
+        getter = Getter()
+        X_tfidf, y, tfIdfVectorizer = getter.get_X_tfidf_y_training_set_for_sentiment_clf_decision_tree()
+
+        # df = pd.DataFrame(tfidf[0].T.todense(), index=tfIdfVectorizer.get_feature_names(), columns=["TF-IDF"])
+        # df = df.sort_values('TF-IDF', ascending=False)
+        # print (df.head(25))
+
+
+        # Split dataset into training set and test set
+        X_train, X_test, y_train, y_test = train_test_split(X_tfidf, y, test_size=0.2, random_state=42)
+
+        # Create Decision Tree classifer object
+        clf = DecisionTreeClassifier(criterion="gini", max_depth=1000)
+        # Train Decision Tree Classifer
+        clf = clf.fit(X_train,y_train)
+
+        now = datetime.datetime.now()
+        print("{} : finished training".format(now.strftime("%Y-%m-%d %H:%M:%S")))
+        print("------------------------------------------")
+
+        # Predict the response for test dataset
+        y_pred = clf.predict(X_test)
+
+        # Model Accuracy
+        print(metrics.classification_report(y_test,y_pred))
+        print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+        
+        export_graphviz(clf, out_file="../generated_files/sentiment_clf_DecisionTreeClassifier/decision_tree.dot",
+                        filled=True, rounded=True,
+                        special_characters=True,
+                        feature_names = tfIdfVectorizer.get_feature_names(),
+                        class_names=['negative','positive'])
+        print("Tree depth = {}".format(clf.get_depth()))
+        print("Number of parameters in the model: {}".format(len(clf.get_params)))
+        print("------------------------------------------")
+
+        return clf
+
 class Predictor:
     def input_predictor(self,input_: list, vectorizer, clf) -> list:
         input_ = vectorizer.transform(input_).toarray()
-        result = clf.predict(input_)
+        label = clf.predict(input_)
+        confidence = clf.predict_proba(input_)
+        result = {'label':label, 'confidence':confidence}
         return result
+
+class FeatureExtractor:
+    def best_features_term_frequency_approach(self, hotel_name, pos_dict):
+        best_features = {}
+        # Find 5 features that are talked about the most.
+        for k in sorted(pos_dict, key=lambda k: len(pos_dict[k]), reverse=True):
+            # print(str(k)+":"+str(len(pos_dict[k]))+" = ",end="")
+            # print(pos_dict[k])
+
+            # Find the top 3 most used words that describes this feature
+            values = Counter(pos_dict[k])
+            sorted_values = dict(sorted(values.items(), key=lambda item: item[1], reverse=True))
+
+            best_three = {i: sorted_values[i] for i in list(sorted_values)[:3]}
+            best_features[k] = best_three
+
+            if len(best_features)==5:
+                break
+        # print(best_features)
+        return best_features

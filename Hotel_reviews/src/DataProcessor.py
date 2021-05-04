@@ -4,27 +4,28 @@ import re
 import nltk
 import numpy as np
 import datetime
+
 from nltk.tokenize import word_tokenize, sent_tokenize, PunktSentenceTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from nltk.tree import Tree
+from nltk.draw import TreeView
+
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.tree import export_graphviz
-
-from IPython.display import Image  
-
-import pandas as pd
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
-from bs4 import BeautifulSoup
 
+from IPython.display import Image  
+from bs4 import BeautifulSoup
+from spellchecker import SpellChecker
 from pathlib import Path
+from tqdm import tqdm
+
 from DataProvider import Getter
 from Analyser import Predictor
-from tqdm import tqdm
-from nltk.tokenize import word_tokenize
-
 
 class FeatureReviewsExtractor:
 
@@ -109,6 +110,139 @@ class FeatureReviewsExtractor:
             description.append(neighbouring)
 
         return description
+
+class TextAnalysis:
+    def start(self,sent, review_type):
+        lexical_result = self.lexical_analysis(sent)
+        if review_type=="pos":
+            syntactic_result = self.syntactic_analysis_for_positives(lexical_result)
+        else:
+            syntactic_result = self.syntactic_analysis_for_negatives(lexical_result)
+        chunks_dict = self.noun_adj_dict(syntactic_result)
+        return chunks_dict
+
+    # Lexical analysis
+    def lexical_analysis(self,sent):
+        # Tokenising the sentence into separate word tokens
+        sent = sent.lower()
+        tokenise = word_tokenize(sent)
+
+        # Check spelling
+        tokenise = self.spell_check(tokenise)
+
+        # Apply parts of speech tags to the tokens
+        pos_tagged = nltk.pos_tag(tokenise)
+        return pos_tagged
+    
+    def spell_check(self, tokens):
+        spell = SpellChecker()
+        misspelled = spell.unknown(tokens)
+
+        for word in misspelled:
+            tokens[tokens.index(word)] = spell.correction(word)
+        return tokens
+
+    # Syntactic Analysis
+    def syntactic_analysis_for_positives(self,sent):
+        # Define chunking grammar using regular expression
+        # grammar_1 captures sentence structure where the adjectives comes after the nouns
+        grammar_1 = r"""
+                    NP: {(<NN>|<NNS>)+<PRP>*<VBD>*<VBZ>*<RB>*<VBN>*<JJ>*((<CC><VBD>+)|(<CC><RB>+<JJ>*)|(<CC><VBN>+)|(<CC><JJ>+))*}
+                    """
+        # grammar_2 captures sentence structure where the adjectives comes before the nouns
+        grammar_2 = r"""
+                    NP: {<JJ>(<NN>|<NNS>)+}
+                    """
+
+        chunks_1 = self.grammar_parsing(grammar_1,sent)
+        chunks_2 = self.grammar_parsing(grammar_2,sent)
+        chunks = chunks_1 + chunks_2
+
+        return chunks
+    
+    def syntactic_analysis_for_negatives(self, sent):
+        # Define chunking grammar using regular expression
+        
+        grammar_1 = r"""
+                    NP: {(<JJ>|<RB>|<VBD>)(<NN>|<NNS>)}
+                    """
+        # grammar_2 captures sentence structure where the adjectives comes after the nouns
+        grammar_2 = r"""
+                    NP: {(<NN>|<NNS>)<VBP>*<VBD>*<JJ>*<VB>*}
+                    """
+        
+        chunks_1 = self.grammar_parsing(grammar_1,sent)
+        chunks_2 = self.grammar_parsing(grammar_2,sent)
+        chunks = chunks_1 + chunks_2
+
+        return chunks
+    
+    # Parse the sentence and chunking using grammar
+    def grammar_parsing(self,grammar,sent):
+        cp = nltk.RegexpParser(grammar)
+        result = cp.parse(sent)
+
+        chunks = []
+        for subtree in result.subtrees():
+            # if subtree length smaller than 2 -> single words -> ignore
+            if len(subtree) < 2 or subtree.label()=="S":
+                continue
+
+            # Check for duplicates
+            if not subtree in chunks:
+                chunks.append(subtree)
+
+        return chunks
+
+    # extract noun and adjs from chunk
+    def noun_adj_dict(self, subtree_list):        
+        noun_adj_dict = {}
+        # print("sub tree list = ",end='')
+        # print(subtree_list)
+ 
+        for subtree in subtree_list:
+            # print("subtree = " ,end='')
+            # print(subtree)
+            chunk_adjs = []
+            chunk_noun = ""
+
+            for leaf in subtree.leaves():
+                if leaf[1]=="NN" or leaf[1]=="NNS":
+                    chunk_noun = leaf[0]
+                else:  
+                    chunk_adjs.append(leaf[0])
+            # if noun is single letter, then it's probably a first person pronoun "i", ignore
+            if len(chunk_noun)==1:
+                continue
+            # if no adjectives, then subtree becomes obsolete 
+            if not chunk_adjs:
+                continue
+
+            # remove unnecessary stop words
+            chunk_adjs, chunk_noun = self.clean_and_lemmatize(chunk_adjs, chunk_noun)
+            
+            # print(chunk_adjs)
+            # check again if there are useful adjectives left
+            if chunk_adjs!=[]:
+                # print(chunk_adjs)
+                if chunk_noun in noun_adj_dict:
+                    noun_adj_dict[chunk_noun] = noun_adj_dict[chunk_noun]+chunk_adjs
+                else:
+                    noun_adj_dict[chunk_noun] = chunk_adjs
+        return noun_adj_dict
+
+    # remove stop words and lemmatization
+    def clean_and_lemmatize(self,chunks, noun):
+        stemmer = WordNetLemmatizer()
+        more_stopwords = ['nothing','thing','without','really','minor','able','real','actual','previous',
+                          'arrive','asmathic','wouldn','ie','iyi']
+        stop_words = nltk.corpus.stopwords.words('english')
+        stop_words.extend(more_stopwords)
+
+        cleaned_chunks = [stemmer.lemmatize(word, pos="n") for word in chunks if word not in stop_words]
+        noun = stemmer.lemmatize(noun, pos="n")
+        return cleaned_chunks, noun
+
 
 class DataPreprocessing:
     def simplify(self,sent):
@@ -294,6 +428,8 @@ class DataPreprocessing:
 
     def preprocessing_3(self, X_, y_, feature):
         X_ = X_.values.tolist()
+        print("============================")
+        print(X_)
         y_ = y_.values.tolist()
 
         X_sentence = self.cleaning_for_preprocessing3(X_, feature)
@@ -412,8 +548,9 @@ class Categorical:
                     useful_positive_descriptions = []
                     for i, label in enumerate(result):
                         if label==1:
-                            description = extract.POS_extraction(reviews_list[i])
-                            useful_positive_descriptions.extend(description)
+                            # description = extract.POS_extraction(reviews_list[i])
+                            # useful_positive_descriptions.extend(description)
+                            continue
 
                     useful_positive_descriptions = list(set(useful_positive_descriptions))
 
@@ -425,7 +562,6 @@ class Categorical:
             path = '../labelled_negative/{}.csv'.format(folder_name)
             dataframe.to_csv(path, index=False)
             print("[{}] category = {}".format(folder_name,len(record['Hotel_Name'])))
-
 
     def hotel_with_most_labels(self):
         hotels_in_each_label = []

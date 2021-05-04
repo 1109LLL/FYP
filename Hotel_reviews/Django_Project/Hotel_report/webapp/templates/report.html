@@ -26,8 +26,6 @@
                 <tr>
                     <th scope="col">Nationality of customers who generally enjoyed the stay (Average score >= 8):</th>
                     <th scope="col">Average score given</th>
-                    <th scope="col">Nationality of customers who generally disliked the stay (Average score <= 2):</th>
-                    <th scope="col">Average score given</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,8 +33,24 @@
                     <tr>
                         <td>{{pos_customer_bg.0}}</td>
                         <td>{{pos_customer_bg.1}}</td>
-                        <td>{{neg_nationality_score}}</td>
-                        <td>{</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table tabe-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Nationality of customers who generally disliked the stay (Average score <= 3):</th>
+                    <th scope="col">Average score given</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for neg_customer_bg in neg_nationality_score %}
+                    <tr>
+                        <td>{{neg_customer_bg.0}}</td>
+                        <td>{{neg_customer_bg.1}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -46,15 +60,33 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Feature</th>
-                    <th scope="col">Key reviews</th>
+                    <th scope="col">Best Feature</th>
+                    <th scope="col">Values</th>
                 </tr>
             </thead>
             <tbody>
                 {% for feature_item in features %}
                     <tr>
                         <td>{{feature_item.0}}</td>
-                        <td>{{feature_item.1.0}}</td>
+                        <td>{{feature_item.1}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Worst Feature</th>
+                    <th scope="col">Values</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feature_item in worst_features %}
+                    <tr>
+                        <td>{{feature_item.0}}</td>
+                        <td>{{feature_item.1}}</td>
                     </tr>
                 {% endfor %}
             </tbody>

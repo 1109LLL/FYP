@@ -1,0 +1,148 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}Motivations}{2}{section.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.2}Aims}{2}{section.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.3}Project Overview}{3}{section.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.1}Data Analyser}{3}{subsection.1.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.2}Front-end}{3}{subsection.1.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.3}Back-end}{3}{subsection.1.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.4}Overview of report structure}{4}{section.1.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Context}{5}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Tools}{5}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Design and Implementation}{7}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}System architecture}{7}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Text analysis}{7}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.1}Lexical Analysis}{8}{subsection.3.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\textit {Tokenisation}}{8}{section*.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\textit {POS-tagging}}{8}{section*.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.2}Syntactic Analysis}{9}{subsection.3.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\textit {Chunking}}{9}{section*.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\textit {Grammar}}{9}{section*.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\textit {Lemmatization}}{9}{section*.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\textit {Stop words}}{10}{section*.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.3}Semantic analysis}{10}{subsection.3.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Hotel features extraction}{10}{section*.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Sentiment analysis}{11}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.1}Motivation}{11}{subsection.3.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.2}Supervised machine learning problem}{12}{subsection.3.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.3}Feature extraction}{12}{subsection.3.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Bag of words}{12}{section*.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{TF-IDF}{12}{section*.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.4}Training sentiment classifier}{13}{subsection.3.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}Front-end and Back-end}{14}{section.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.1}Django web framework}{14}{subsection.3.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{urls.py}{14}{section*.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{views.py}{14}{section*.12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{models.py}{15}{section*.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Templates}{15}{section*.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.2}User manual}{15}{subsection.3.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Testing and Results Evaluation}{17}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Evaluation metrics}{17}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Prediction accuracy}{17}{section*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Precision, Recall}{18}{section*.16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{F1-score}{18}{section*.17}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Reasoning of model performance}{19}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Training and testing sets}{19}{section*.18}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Underfitting}{19}{section*.19}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Overfitting}{19}{section*.20}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Decision Tree Classifier}{19}{section.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Criterions for decision node}{20}{section*.21}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Tree depth}{20}{section*.22}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Testing}{21}{section*.23}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Investigating depth}{21}{section*.24}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Investigating criterion}{23}{section*.25}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.4}Support vector machine}{24}{section.4.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Parameters}{24}{section*.26}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{K-Fold Cross Validation}{24}{section*.27}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Testing using GridSearchCV}{25}{section*.28}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.5}Random Forest Classifier}{26}{section.4.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Performance result}{26}{section*.29}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.6}MLP Classifier}{26}{section.4.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Testing using GridSearchCV}{26}{section*.30}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Performance result}{26}{section*.31}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.7}Model Selection}{27}{section.4.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Bagging}{27}{section*.32}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusions and Evaluation}{29}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Achievements}{29}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Best and worst features extraction}{29}{section*.33}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Sentiment analysis}{29}{section*.34}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{User accessible interface}{29}{section*.35}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Challenges and Evaluation}{30}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Defining grammar}{30}{section*.36}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{ML models}{30}{section*.37}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}Future Work}{31}{section.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {A}Code}{32}{appendix.A}%

@@ -6,8 +6,9 @@ import re
 import glob
 from DataProcessor import FeatureReviewsExtractor, DataPreprocessing
 from Analyser import Trainer
-from DataProvider import Getter
+from DataProvider import Getter, FileGenerator
 from DataProcessor import Categorical
+from DataProcessor import TextAnalysis
 import datetime 
 
 
@@ -26,6 +27,8 @@ def feature_extraction(df, feature):
     pos_features = analyser.tf_idf(cleaned_pos_reviews)
     neg_features = analyser.tf_idf(cleaned_neg_reviews)
     return pos_features, neg_features
+
+
 
 def simple_recommend():
     pickle_in = open("../pickled_files/reviews.pickle","rb")
@@ -87,14 +90,26 @@ def advanced_recommend():
         # selected_feature_pos = pos_adj[:3]
         # print("Please see recommended hotels with the following descriptions:")
 
+def generate_files():
+    # Generate the files needed for the different parts of the system
+    generator = FileGenerator()
+    # generator.generate_hotel_list() # stored in path=../generated_files/hotel_list/hotels_list.csv
+    # generator.generate_pos_neg_reviews_of_hotel() # stored in path=../generated_files/hotel_pos_neg_reviews/<hotel_name>.csv
+    # generator.generate_noun_adj_dict() # stored in path=../generated_files/hotel_<pos|neg>_review_noun_adj_dict/<hotel_name>.pickle
+    # generator.generate_best_features_term_frequency_approach() # stored in path=../generated_files/hotel_best_features_term_freq/<hotel_name>.pickle
+    # generator.generate_worst_features_term_frequency_approach() # stored in path=../generated_files/hotel_worst_features_term_freq/<hotel_name>.pickle
+    # generator.generate_training_set_for_sentiment_clf_decision_tree() # stored in path=../generated_files/sentiment_clf_DecisionTreeClassifier/X_y_training_set.pickle
+    # generator.generate_fit_training_set_using_tfidf_vectorizer() # stored in path=../generated_files/sentiment_clf_DecisionTreeClassifier/X_tfidf_y_training_set.pickle
+    generator.generate_sentiment_clf_decision_tree() # stored in path=../generated_files/sentiment_clf_DecisionTreeClassifier/Decision_Tree_classifier.pickle
+generate_files()
+# feature_extraction_method_2()
 
+# simple_recommend()
 
-
-
-
-
-
-
+# "hioshgo"  0
+# "kaerngd"  1
+# ["dsg"]    0
+# ["dsaf", "sadg"]  1
 
 
 ########
@@ -119,8 +134,8 @@ def advanced_recommend():
 # read_in_feature_clf("room")
 # train_pos_neg_review_clf()
 
-cat = Categorical()
-cat.labelling()
+# cat = Categorical()
+# cat.labelling()
 # cat.hotel_with_most_labels()
 # cat.labelling_negatives()
 

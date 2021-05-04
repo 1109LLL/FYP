@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.tree import export_graphviz
 # from sklearn.externals.six import StringIO  
 from IPython.display import Image  
-from DataProcessor import FeatureReviewsExtractor, DataPreprocessing
+
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
@@ -17,12 +17,18 @@ from sklearn import metrics #Import scikit-learn metrics module for accuracy cal
 from bs4 import BeautifulSoup
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
-from DataProcessor import Categorical
-from sklearn.model_selection import GridSearchCV
+
+from DataProcessor import FeatureReviewsExtractor, DataPreprocessing, TextAnalysis, Categorical
 from DataProvider import Getter
-from Analyser import Trainer
+
+from sklearn.model_selection import GridSearchCV
+
+from Analyser import Trainer, FeatureExtractor, Predictor
 from dtreeviz.trees import dtreeviz
 from matplotlib import pyplot as plt
+
+from spellchecker import SpellChecker
+
 # words = ['minor','sandwich', 'able','private']
 # treebankTagger = nltk.data.load('taggers/maxent_treebank_pos_tagger/english.pickle')
 # pos_tagged = treebankTagger.tag(words)
@@ -121,6 +127,25 @@ def newtest():
 def create_document_term_matrix(x, vectorizer):
     return pd.DataFrame(x, columns=vectorizer.get_feature_names())
 
+getter = Getter()
+clf, tfIdfVectorizer = getter.get_sentiment_decision_tree_clf()
+
+print("Tree depth = {}".format(clf.get_depth()))
+print("Number of parameters in the model: {}".format(clf.get_params()))
+
+# processor = TextAnalysis()
+# sent = " Rooms are nice but for elderly a bit difficult as most rooms are two story with narrow steps So ask for single level Inside the rooms are very very basic just tea coffee and boiler and no bar empty fridge "
+# a = " My room was dirty and I was afraid to walk barefoot on the floor which looked as if it was not cleaned in weeks White furniture which looked nice in pictures was dirty too and the door looked like it was attacked by an angry dog My shower drain was clogged and the staff did not respond to my request to clean it On a day with heavy rainfall a pretty common occurrence in Amsterdam the roof in my room was leaking luckily not on the bed you could also see signs of earlier water damage I also saw insects running on the floor Overall the second floor of the property looked dirty and badly kept On top of all of this a repairman who came to fix something in a room next door at midnight was very noisy as were many of the guests I understand the challenges of running a hotel in an old building but this negligence is inconsistent with prices demanded by the hotel On the last night after I complained about water damage the night shift manager offered to move me to a different room but that offer came pretty late around midnight when I was already in bed and ready to sleep "
+# c = " The room was big enough and the bed is good "
+# aa = processor.start(a)
+
+# lexical_result = processor.lexical_analysis(c)
+# chunks = processor.syntactic_analysis_for_negatives(lexical_result)
+# chunks_dict = processor.noun_adj_dict(chunks)
+# print(chunks_dict)
+
+
+
 # msg = ["hi man how are you", "i just wanna sleep"]
 
 # vec = CountVectorizer()
@@ -156,27 +181,31 @@ def create_document_term_matrix(x, vectorizer):
 # print(len(negative))
 
 
-trainer = Trainer()
+
+
+####################
+# trainer = Trainer()
     
-X_path = "../pickled_files/X_training_set.pickle"
-y_path = "../pickled_files/y_training_set_label.pickle"
-pickle_in = open(X_path, "rb")
-X = pickle.load(pickle_in)
-pickle_in = open(y_path, "rb")
-y = pickle.load(pickle_in)
+# X_path = "../pickled_files/X_training_set.pickle"
+# y_path = "../pickled_files/y_training_set_label.pickle"
+# pickle_in = open(X_path, "rb")
+# X = pickle.load(pickle_in)
+# pickle_in = open(y_path, "rb")
+# y = pickle.load(pickle_in)
 
-max_feature = 50
-info = "50_feature_vector"
-min_df = None
-X_train, X_test, y_train, y_test, vectorizer, X_transformed = trainer.create_vectorizer(X, y, max_feature, min_df, info)
+# max_feature = 50
+# info = "50_feature_vector"
+# min_df = None
+# X_train, X_test, y_train, y_test, vectorizer, X_transformed = trainer.create_vectorizer(X, y, max_feature, min_df, info)
 
-getter = Getter()
-vectorizer, clf = getter.getPosNegReviewsClf()
-fig = plt.figure(figsize=(25,20))
+# getter = Getter()
+# vectorizer, clf = getter.getPosNegReviewsClf()
+# fig = plt.figure(figsize=(25,20))
 
-viz = dtreeviz(clf, X_train, y_train,
-                target_name="target",
-                feature_names=vectorizer.get_feature_names(),
-                class_names=["positive","nagative"])
+# viz = dtreeviz(clf, X_train, y_train,
+#                 target_name="target",
+#                 feature_names=vectorizer.get_feature_names(),
+#                 class_names=["positive","nagative"])
 
-fig.savefig("decistion_tree.png")
+# fig.savefig("decistion_tree.png")
+# ####################

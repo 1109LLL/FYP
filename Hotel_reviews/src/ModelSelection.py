@@ -446,6 +446,6 @@ stop_words = set(stopwords.words('english')) - set(['no'])
 # main()
 # evaluate_bag_of_words_max_features()
 # best_model()
-SVM()
+# SVM()
 # multiple_classifiers_comparison()
 

@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 import pandas as pd
+import pickle
 
 # Create your views here.
 def index(request):
@@ -38,8 +39,8 @@ def report(request):
     # disliked by customers from
     neg_name_nationality_score = full_dataset[['Hotel_Name', 'Reviewer_Nationality', 'Reviewer_Score']].copy()
     neg_name_nationality_score = neg_name_nationality_score.loc[neg_name_nationality_score['Hotel_Name']==hotel_selected]
-    neg_nationality_score = neg_name_nationality_score.groupby('Reviewer_Nationality',as_index=False).mean().sort_values(by='Reviwer_Score', ascending=False)
-    neg_nationality_score = neg_nationality_score.loc[neg_nationality_score['Reviewer_Score'] <= 2,:]
+    neg_nationality_score = neg_name_nationality_score.groupby('Reviewer_Nationality',as_index=False).mean().sort_values(by='Reviewer_Score', ascending=False)
+    neg_nationality_score = neg_nationality_score.loc[neg_nationality_score['Reviewer_Score'] <= 3,:]
     neg_nationality_score = neg_nationality_score.values.tolist()
 
     # feature comments
@@ -48,27 +49,49 @@ def report(request):
                     "food","breakfast","lunch","dinner","restaurant", "bar"]
 
     feature_info = []
-    for feature in features:
-        df = pd.read_csv("../../distance_match_labelled_hotels/{}.csv".format(feature))
-        feature_of_hotel = df.loc[df['Hotel_Name']==hotel_selected]
-        if feature_of_hotel.empty:
-            continue
+    # for feature in features:
+    #     df = pd.read_csv("../../distance_match_labelled_hotels/{}.csv".format(feature))
+    #     feature_of_hotel = df.loc[df['Hotel_Name']==hotel_selected]
+    #     if feature_of_hotel.empty:
+    #         continue
 
-        feature_of_hotel = feature_of_hotel["Descriptions"]
-        subset = feature_of_hotel.values.tolist()
+    #     feature_of_hotel = feature_of_hotel["Descriptions"]
+    #     subset = feature_of_hotel.values.tolist()
         
-        if subset[0] == '[]':
-            continue
+    #     if subset[0] == '[]':
+    #         continue
 
+    #     info = []
+    #     info.append(feature)
+    #     info.append(subset)
+    #     feature_info.append(info)
+
+    
+    pickle_in = open("../../generated_files/hotel_best_features_term_freq/{}.pickle".format(hotel_selected), "rb")
+    best_features = pickle.load(pickle_in)
+
+    for k,v in best_features.items():
         info = []
-        info.append(feature)
-        info.append(subset)
+        info.append(k)
+        info.append(list(v.items()))
+
         feature_info.append(info)
+    
+    pickle_in = open("../../generated_files/hotel_worst_features_term_freq/{}.pickle".format(hotel_selected), "rb")
+    worst_features_list = pickle.load(pickle_in)
+
+    worst_features = []
+    for k,v in worst_features_list.items():
+        info = []
+        info.append(k)
+        info.append(list(v.items()))
+        worst_features.append(info)
 
     # content to render
     context = {
         'hotel_name':hotel_selected,
         'features':feature_info,
+        'worst_features':worst_features,
         'average_rating':average_rating,
         'location':address,
         'pos_nationality_score':pos_nationality_score,
@@ -76,3 +99,4 @@ def report(request):
     }
 
     return render(request, 'report.html', context)    
+
