@@ -2,13 +2,13 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
+from .models import *
 import pandas as pd
 import pickle
 
 # Create your views here.
 def index(request):
-    df = pd.read_csv("../../data/Hotel_Reviews.csv", usecols=['Hotel_Name'])
-    unique_hotel_list = df.Hotel_Name.unique()
+    unique_hotel_list = getHotels()
     context = {
         'hotel_names':unique_hotel_list
     }
@@ -17,75 +17,19 @@ def index(request):
 def report(request):
     hotel_selected = request.GET.get('select')
     
-    full_dataset = pd.read_csv("../../data/Hotel_Reviews.csv")
+    # full_dataset = pd.read_csv("../../data/Hotel_Reviews.csv")
 
     # average rating
-    name_rating = full_dataset[['Hotel_Name', 'Average_Score']].copy()
-    name_rating = name_rating.loc[name_rating['Hotel_Name']==hotel_selected]
-    average_rating = name_rating['Average_Score'].unique().tolist()
+    average_rating = get_average_ratings(hotel_selected)
 
     # address
-    name_address = full_dataset[['Hotel_Name', 'Hotel_Address']].copy()
-    name_address = name_address.loc[name_address['Hotel_Name']==hotel_selected]
-    address = name_address['Hotel_Address'].unique().tolist()
+    address = get_hotel_address(hotel_selected)
 
-    # favoured by customers from
-    pos_name_nationality_score = full_dataset[['Hotel_Name', 'Reviewer_Nationality', 'Reviewer_Score']].copy()
-    pos_name_nationality_score = pos_name_nationality_score.loc[pos_name_nationality_score['Hotel_Name']==hotel_selected]
-    pos_nationality_score = pos_name_nationality_score.groupby('Reviewer_Nationality', as_index=False).mean().sort_values(by='Reviewer_Score', ascending=False)
-    pos_nationality_score = pos_nationality_score.loc[pos_nationality_score['Reviewer_Score'] >= 8,:]
-    pos_nationality_score = pos_nationality_score.values.tolist()
-    
-    # disliked by customers from
-    neg_name_nationality_score = full_dataset[['Hotel_Name', 'Reviewer_Nationality', 'Reviewer_Score']].copy()
-    neg_name_nationality_score = neg_name_nationality_score.loc[neg_name_nationality_score['Hotel_Name']==hotel_selected]
-    neg_nationality_score = neg_name_nationality_score.groupby('Reviewer_Nationality',as_index=False).mean().sort_values(by='Reviewer_Score', ascending=False)
-    neg_nationality_score = neg_nationality_score.loc[neg_nationality_score['Reviewer_Score'] <= 3,:]
-    neg_nationality_score = neg_nationality_score.values.tolist()
+    # favoured and disliked by customers from
+    pos_nationality_score, neg_nationality_score = get_nationality_preferences(hotel_selected)
 
     # feature comments
-    features = ["room","bed","location","bathroom","staff","staircase",
-                    "park","hotel","building","style","transport","parking",
-                    "food","breakfast","lunch","dinner","restaurant", "bar"]
-
-    feature_info = []
-    # for feature in features:
-    #     df = pd.read_csv("../../distance_match_labelled_hotels/{}.csv".format(feature))
-    #     feature_of_hotel = df.loc[df['Hotel_Name']==hotel_selected]
-    #     if feature_of_hotel.empty:
-    #         continue
-
-    #     feature_of_hotel = feature_of_hotel["Descriptions"]
-    #     subset = feature_of_hotel.values.tolist()
-        
-    #     if subset[0] == '[]':
-    #         continue
-
-    #     info = []
-    #     info.append(feature)
-    #     info.append(subset)
-    #     feature_info.append(info)
-
-    
-    pickle_in = open("../../generated_files/hotel_best_features_term_freq/{}.pickle".format(hotel_selected), "rb")
-    best_features = pickle.load(pickle_in)
-
-    for k,v in best_features.items():
-        info = []
-        info.append(k)
-        info.append(list(v.items()))
-
-        feature_info.append(info)
-    
-    pickle_in = open("../../generated_files/hotel_worst_features_term_freq/{}.pickle".format(hotel_selected), "rb")
-    worst_features_list = pickle.load(pickle_in)
-
-    worst_features = []
-    for k,v in worst_features_list.items():
-        info = []
-        info.append(k)
-        info.append(list(v.items()))
-        worst_features.append(info)
+    feature_info, worst_features = get_feature_comments(hotel_selected)
 
     # content to render
     context = {
