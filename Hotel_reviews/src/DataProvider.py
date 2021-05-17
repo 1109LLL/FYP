@@ -94,6 +94,7 @@ class Getter:
 
 
 class FileGenerator:
+
     def generate_hotel_list(self):
         print("generate_hotel_list...",end='')
         df = pd.read_csv("../data/Hotel_Reviews.csv", usecols=['Hotel_Name'])
@@ -267,4 +268,59 @@ class FileGenerator:
         pickle.dump(clf, pickle_out)
         pickle_out.close()
 
+        print("Done")
+    
+    # Files related to report
+    def generate_average_scores(self):
+        print("generate_hotel_average_score...")
+        getter = Getter()
+        unique_hotel_list = getter.getHotelList()
+        unique_hotel_list = unique_hotel_list.Hotel_Name.unique()
+
+        dataset = getter.getFullDataset()
+
+        name_rating = dataset[['Hotel_Name', 'Average_Score']].copy()
+
+        avg_score = {"Hotel_Name":[], "Average_score":[]}
+
+        for hotel in unique_hotel_list:
+            hotel_rating = name_rating.loc[name_rating['Hotel_Name']==hotel]
+            rating = hotel_rating['Average_Score'].unique()[0]
+            avg_score["Hotel_Name"].append(hotel)
+            avg_score["Average_score"].append(rating)
+
+        df = pd.DataFrame(avg_score, columns=["Hotel_Name","Average_score"])
+        
+        pickle_out = open("../generated_files/hotel_report/hotel_average_score.pickle","wb")
+        pickle.dump(df, pickle_out)
+        pickle_out.close()
+        print("Done")
+    
+    def generate_hotel_address(self):
+        print("generate_hotel_address...")
+        getter = Getter()
+        unique_hotel_list = getter.getHotelList()
+        unique_hotel_list = unique_hotel_list.Hotel_Name.unique()
+
+        dataset = getter.getFullDataset()
+
+        name_address = dataset[['Hotel_Name', 'Hotel_Address']].copy()
+
+        addresses = {"Hotel_Name":[], "Hotel_Address":[]}
+
+        for hotel in unique_hotel_list:
+            hotel_address = name_address.loc[name_address['Hotel_Name']==hotel]
+            address = hotel_address['Hotel_Address'].unique()[0]
+            addresses["Hotel_Name"].append(hotel)
+            addresses["Hotel_Address"].append(address)
+
+        df = pd.DataFrame(addresses, columns=["Hotel_Name","Hotel_Address"])
+        
+        pickle_out = open("../generated_files/hotel_report/hotel_address.pickle","wb")
+        pickle.dump(df, pickle_out)
+        pickle_out.close()
+    
+        pickle_in = open("../generated_files/hotel_report/hotel_address.pickle", "rb")
+        hi = pickle.load(pickle_in)
+        print(hi)
         print("Done")

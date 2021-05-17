@@ -100,7 +100,9 @@ def generate_files():
     # generator.generate_worst_features_term_frequency_approach() # stored in path=../generated_files/hotel_worst_features_term_freq/<hotel_name>.pickle
     # generator.generate_training_set_for_sentiment_clf_decision_tree() # stored in path=../generated_files/sentiment_clf_DecisionTreeClassifier/X_y_training_set.pickle
     # generator.generate_fit_training_set_using_tfidf_vectorizer() # stored in path=../generated_files/sentiment_clf_DecisionTreeClassifier/X_tfidf_y_training_set.pickle
-    generator.generate_sentiment_clf_decision_tree() # stored in path=../generated_files/sentiment_clf_DecisionTreeClassifier/Decision_Tree_classifier.pickle
+    # generator.generate_sentiment_clf_decision_tree() # stored in path=../generated_files/sentiment_clf_DecisionTreeClassifier/Decision_Tree_classifier.pickle
+    # generator.generate_average_scores() # stored in path=../generated_files/hotel_report/
+    generator.generate_hotel_address() # stored in path=../generated_files/hotel_report/
 generate_files()
 # feature_extraction_method_2()
 
